@@ -18,7 +18,12 @@ function newRecentMistakesFirstSorter (): CardOrganizer {
      * @return The ordered cards.
      */
     reorganize: function (cards: CardStatus[]): CardStatus[] {
-      return []
+      return [...cards].sort((a,b) => {
+        const lastMistakesA = a.lastMistakeTimestamp || 0;
+        const lastMistakesB = b.lastMistakeTimestamp || 0;
+
+        return lastMistakesB - lastMistakesA;
+      });
     }
   }
 };
